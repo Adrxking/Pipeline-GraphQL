@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:16.14.0'
-            args '-p 4000:4000 -u root:root'
+            args '-p 4000:4000 -u root:root  --name graphql-prisma-graphql'
             reuseNode true
         }
     }
