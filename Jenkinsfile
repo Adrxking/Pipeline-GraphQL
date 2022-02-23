@@ -12,11 +12,11 @@ pipeline {
     stages {
         stage('Build') {
             environment {
-                GRAPHQLPROJECT-POSTGRESQL-URL = credentials("GRAPHQLPROJECT-POSTGRESQL-URL")
+                POSTGRESQL = credentials("GRAPHQLPROJECT-POSTGRESQL-URL")
             }
             steps {
                 dir("app/graphql"){
-                    sh 'echo "$GRAPHQLPROJECT-POSTGRESQL-URL" > .env'
+                    sh 'echo "$POSTGRESQL" > .env'
                     sh 'npm install'
                 }
             }
