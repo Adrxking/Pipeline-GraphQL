@@ -17,9 +17,9 @@ node {
         def cont = docker.image("adrxking/docker-graphql:${commit_id}")
         cont.pull()
         cont.inside {
-            sh 'echo run ...'
             sh 'echo $POSTGRESQL'
             sh 'cd /app'
+            sh 'npm run build'
             sh 'npm start'
         }
     } 
