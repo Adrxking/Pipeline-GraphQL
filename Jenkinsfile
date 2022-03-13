@@ -3,9 +3,13 @@ node {
     def previous_id
     stage('Preparacion') {
         checkout scm
+        // Save actual id commit on file
         sh "git rev-parse --short HEAD > .git/commit-id"
+        // Read actual id commit
         commit_id = readFile('.git/commit-id').trim()
+        // Check if previous id commit exists
         sh "if (test ! -f .git/previous-id); then echo '' > .git/previous-id; fi"
+        // Read previous id commit
         previous_id = readFile('.git/previous-id').trim()
     }
     stage('Build y Push a DockerHub') {
@@ -24,8 +28,11 @@ node {
             cont.pull()
             // Delete container if exists with same name
             sh "docker stop graphql-prisma-graphql || true && docker rm graphql-prisma-graphql || true"
+            sh "echo $POSTGRESQL > .env"
             // Run container
-            sh "docker run -p 4000:4000 -u root:root --name graphql-prisma-graphql adrxking/docker-graphql:${commit_id}"
+            sh "docker run --restart=always -p 4000:4000 -u root:root --name graphql-prisma-graphql adrxking/docker-graphql:${commit_id}"
+            sh "docker cp .env graphql-prisma-graphql:/app/.env"
+            sh "docker exec -w /app bash -c \"npm run start\""
         }
     } 
 }

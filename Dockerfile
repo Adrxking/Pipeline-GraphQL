@@ -10,4 +10,4 @@ RUN npm run build || :
 RUN ls -la /app
 EXPOSE 4000
 USER node
-CMD npm start
+CMD ["tail", "-f", "/dev/null"]
