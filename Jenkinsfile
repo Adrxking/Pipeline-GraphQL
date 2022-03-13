@@ -22,7 +22,7 @@ node {
             // Download image
             cont.pull()
             // Delete container if exists with same name
-            sh "[ \"$(docker ps -a | grep adrxking/docker-graphql)\" ] && docker rm -f adrxking/docker-graphql:${previous_id}"
+            sh "[$(docker ps -a | grep adrxking/docker-graphql:${previous_id})] && docker rm -f adrxking/docker-graphql:${previous_id}"
             // Run container
             sh "docker run -d -p 4000:4000 -u root:root --name graphql-prisma-graphql adrxking/docker-graphql:${commit_id}"
             // Delete image
