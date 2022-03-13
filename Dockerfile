@@ -5,6 +5,5 @@ ADD . /app/
 RUN npm install
 RUN chmod 777 -R /app
 RUN chown -R 108:113 /root/.npm
-USER node
 EXPOSE 4000
 CMD npm start
