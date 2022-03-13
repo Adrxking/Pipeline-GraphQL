@@ -29,8 +29,8 @@ node {
             // Delete image
             sh "docker rmi adrxking/docker-graphql:${commit_id}"
             // Run commands inside the container
-            sh "docker exec \"echo $POSTGRESQL > /app\" adrxking/docker-graphql:${commit_id}"
-            sh "docker exec --workdir /app adrxking/docker-graphql:${commit_id} ls -la"
+            sh "docker exec graphql-prisma-graphql \"echo $POSTGRESQL > /app\" "
+            sh "docker exec --workdir /app graphql-prisma-graphql ls -la"
         }
     } 
 }
