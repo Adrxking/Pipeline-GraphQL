@@ -5,7 +5,7 @@ node {
         checkout scm
         sh "git rev-parse --short HEAD > .git/commit-id"
         commit_id = readFile('.git/commit-id').trim()
-        sh "if (test ! -f .git/previous-id); then echo '' > .git/previous-id;"
+        sh "if (test ! -f .git/previous-id); then echo '' > .git/previous-id; fi"
         previous_id = readFile('.git/previous-id').trim()
     }
     stage('Build y Push a DockerHub') {
