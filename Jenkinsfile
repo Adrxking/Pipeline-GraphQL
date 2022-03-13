@@ -19,7 +19,7 @@ node {
         cont.inside {
             sh 'echo $POSTGRESQL'
             sh 'cd /app'
-            sh 'chown +x -R ${env.WORKSPACE}/'
+            sh 'chown +x -R ./'
             sh 'npm run build'
             sh 'npm start'
         }
