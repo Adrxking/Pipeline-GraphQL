@@ -18,6 +18,7 @@ node {
                 sh 'echo $POSTGRESQL'
                 sh 'cd /app'
                 sh 'echo $POSTGRESQL > .env'
+                sh 'npm start'
             }
         }
     } 
