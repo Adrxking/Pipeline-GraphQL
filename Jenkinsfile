@@ -17,7 +17,8 @@ node {
             cont.inside {
                 sh 'echo $POSTGRESQL'
                 sh 'cd /app'
-                sh 'chmod +x -R ./'
+                sh 'echo $POSTGRESQL > .env'
+                sh 'npm cache clean --force'
                 sh 'npm run build'
                 sh 'npm start'
             }
