@@ -27,7 +27,7 @@ node {
             // Run container
             sh "docker run -d -p 4000:4000 -u root:root --name graphql-prisma-graphql adrxking/docker-graphql:${commit_id}"
             // Run commands inside the container
-            sh "docker exec graphql-prisma-graphql bash -c \"${echo \$POSTGRESQL > /app/.env}\""
+            sh "docker exec graphql-prisma-graphql bash -c \"${echo "$POSTGRESQL" > /app/.env}\""
             sh "docker exec graphql-prisma-graphql bash -c \"${ls -la}\""
         }
     } 
