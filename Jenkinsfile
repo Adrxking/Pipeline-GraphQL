@@ -11,17 +11,16 @@ node {
         }
     }
     stage('run') {
-        environment {
-            POSTGRESQL = credentials("GRAPHQLPROJECT-POSTGRESQL-URL")
-        }
-        def cont = docker.image("adrxking/docker-graphql:${commit_id}")
-        cont.pull()
-        cont.inside {
-            sh 'echo $POSTGRESQL'
-            sh 'cd /app'
-            sh 'chown +x -R ./'
-            sh 'npm run build'
-            sh 'npm start'
+        withCredentials([string(credentialsId: 'GRAPHQLPROJECT-POSTGRESQL-URL', variable: 'POSTGRESQL')]) {
+            def cont = docker.image("adrxking/docker-graphql:${commit_id}")
+            cont.pull()
+            cont.inside {
+                sh 'echo $POSTGRESQL'
+                sh 'cd /app'
+                sh 'chmod +x -R ./'
+                sh 'npm run build'
+                sh 'npm start'
+            }
         }
     } 
 }
