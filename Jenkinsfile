@@ -19,8 +19,6 @@ node {
                 sh 'cd /app'
                 sh 'echo $POSTGRESQL > .env'
                 sh 'npm cache clean --force'
-                sh 'ls -la /app'
-                sh 'npm run build'
                 sh 'npm start'
             }
         }
