@@ -35,7 +35,7 @@ node {
             // Save env 
             sh "echo $POSTGRESQL > ./environments/.env"
             // Run container
-            sh "docker run -p 4000:4000 -u root:root --name graphql-prisma-graphql -v \$(pwd)/environments/:/tmp/environments/ adrxking/docker-graphql:${commit_id}"
+            sh "docker run -d --restart always -p 4000:4000 -u root:root --name graphql-prisma-graphql -v \$(pwd)/environments/:/tmp/environments/ adrxking/docker-graphql:${commit_id}"
         }
     } 
 }
