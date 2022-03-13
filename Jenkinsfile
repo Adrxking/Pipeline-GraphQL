@@ -18,8 +18,6 @@ node {
                 sh 'echo $POSTGRESQL'
                 sh 'cd /app'
                 sh 'echo $POSTGRESQL > .env'
-                sh 'npm cache clean --force'
-                sh 'npm start'
             }
         }
     } 
