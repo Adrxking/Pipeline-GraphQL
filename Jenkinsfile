@@ -18,7 +18,8 @@ node {
         cont.pull()
         cont.inside {
             sh 'echo run ...'
-            sh 'echo ${POSTGRESQL}'
+            sh 'echo $POSTGRESQL'
+            sh 'cd /app'
             sh 'npm start'
         }
     } 
