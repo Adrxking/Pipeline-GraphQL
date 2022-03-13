@@ -13,7 +13,7 @@ node {
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
             def app = docker.build("adrxking/docker-graphql:${commit_id}", '.').push()
         }
-        sh "${commit_id} > .git/previous-id"
+        sh "echo ${commit_id} > .git/previous-id"
         // Delete image
         sh "docker rmi adrxking/docker-graphql:${commit_id}"
     }
