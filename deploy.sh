@@ -1,7 +1,7 @@
 #!/bin/bash
 
-cp /tmp/environments/.env /app/.env
-echo "Comete una verga" >> /tmp/environments/.env
 cd /app
+cp /tmp/environments/.env ./.env
 ls -la /app
+cat /app/.env
 npm run start
