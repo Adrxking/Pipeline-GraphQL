@@ -17,21 +17,25 @@ node {
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
             def app = docker.build("adrxking/docker-graphql:${commit_id}", '.').push()
         }
+        // Save previous id commit on file
         sh "echo ${commit_id} > .git/previous-id"
         // Delete image
         sh "docker rmi adrxking/docker-graphql:${commit_id}"
     }
     stage('Correr contenedor') {
         withCredentials([string(credentialsId: 'GRAPHQLPROJECT-POSTGRESQL-URL', variable: 'POSTGRESQL')]) {
+            // save image to constraint
             def cont = docker.image("adrxking/docker-graphql:${commit_id}")
             // Download image
             cont.pull()
             // Delete container if exists with same name
             sh "docker stop graphql-prisma-graphql || true && docker rm graphql-prisma-graphql || true"
+            // Check if environments folder exists
             sh "if (test ! -d ./environments); then mkdir ./environments; fi"
+            // Save env 
             sh "echo $POSTGRESQL > ./environments/.env"
             // Run container
-            sh "docker run -d --restart=always -p 4000:4000 -u root:root --name graphql-prisma-graphql -v \$(pwd)/environments/:/tmp/environments/ adrxking/docker-graphql:${commit_id}"
+            sh "docker run -p 4000:4000 -u root:root --name graphql-prisma-graphql -v \$(pwd)/environments/:/tmp/environments/ adrxking/docker-graphql:${commit_id}"
         }
     } 
 }
