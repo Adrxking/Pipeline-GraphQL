@@ -19,7 +19,7 @@ node {
         cont.inside {
             sh 'echo $POSTGRESQL'
             sh 'cd /app'
-            sh 'sudo chown -R 108:113 "/.npm"'
+            sh 'chown -R 108:113 "/.npm"'
             sh 'npm run build'
             sh 'npm start'
         }
