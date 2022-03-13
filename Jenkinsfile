@@ -14,7 +14,7 @@ node {
         withCredentials([string(credentialsId: 'GRAPHQLPROJECT-POSTGRESQL-URL', variable: 'POSTGRESQL')]) {
             def cont = docker.image("adrxking/docker-graphql:${commit_id}")
             cont.pull()
-            cont.run(['-p 4000:4000 -u root:root --name graphql-prisma-graphql'])
+            sh 'docker run -d -p 4000:4000 -u root:root --name graphql-prisma-graphql adrxking/docker-graphql:${commit_id}'
             cont.inside {
                 sh 'echo $POSTGRESQL'
                 sh 'cd /app'
