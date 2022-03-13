@@ -2,7 +2,7 @@ FROM node:lts-alpine
 ENV NODE_ENV production
 WORKDIR /app
 ADD . /app/
-RUN npm install
+RUN npm install --dev
 RUN chmod 777 -R /app
 RUN chown -R 108:113 /root/.npm
 RUN npm run build
