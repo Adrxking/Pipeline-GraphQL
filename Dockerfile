@@ -2,7 +2,6 @@ FROM node:lts-alpine
 ENV NODE_ENV production
 WORKDIR /app
 ADD . .
-ADD ./.env ./.env
 RUN npm install --include=dev
 RUN chown -R 108:113 /root/.npm
 RUN npm --version
