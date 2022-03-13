@@ -30,7 +30,7 @@ node {
             sh "docker rmi adrxking/docker-graphql:${commit_id}"
             // Run commands inside the container
             sh "docker exec graphql-prisma-graphql bash \"${echo $POSTGRESQL > /app}\""
-            sh "docker exec -w /app graphql-prisma-graphql ls -la"
+            sh "docker exec graphql-prisma-graphql bash \"${ls -la}\""
         }
     } 
 }
