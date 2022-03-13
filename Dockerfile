@@ -6,4 +6,4 @@ RUN npm install --include=dev
 RUN chown -R 108:113 /root/.npm
 RUN npm run build || :
 EXPOSE 4000
-ENTRYPOINT ["bash","/app/deploy.sh"]
+ENTRYPOINT ["sh","/app/deploy.sh"]
