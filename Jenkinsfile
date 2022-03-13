@@ -10,4 +10,16 @@ node {
             def app = docker.build("adrxking/docker-graphql:${commit_id}", '.').push()
         }
     }
+    stage('run') {
+        environment {
+            POSTGRESQL = credentials("GRAPHQLPROJECT-POSTGRESQL-URL")
+        }
+        def cont = docker.image("adrxking/docker-graphql:${commit_id}")
+        cont.pull()
+        cont.inside {
+            sh 'echo run ...'
+            sh 'echo ${POSTGRESQL}'
+            sh 'npm start'
+        }
+    } 
 }
