@@ -31,7 +31,7 @@ node {
             sh "if (test ! -d ./environments); then mkdir ./environments; fi"
             sh "echo $POSTGRESQL > ./environments/.env"
             // Run container
-            sh "docker run -d --restart=always -p 4000:4000 -u root:root --name graphql-prisma-graphql adrxking/docker-graphql:${commit_id} -v ./environments/:/tmp/environments/"
+            sh "docker run -d --restart=always -p 4000:4000 -u root:root --name graphql-prisma-graphql adrxking/docker-graphql:${commit_id} -v \"$(pwd)\"/environments/:/tmp/environments/"
         }
     } 
 }
