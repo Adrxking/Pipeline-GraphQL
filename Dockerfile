@@ -2,7 +2,7 @@ FROM node:16.14.0
 ENV NODE_ENV production
 WORKDIR /app
 ADD . /app/
-RUN npm install --dev
+RUN npm install --include=dev
 RUN chmod 777 -R /app
 RUN chown -R 108:113 /root/.npm
 RUN npm run build
