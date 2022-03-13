@@ -4,7 +4,7 @@ WORKDIR /app
 ADD . /app/
 RUN npm install --include=dev
 RUN chown -R 108:113 /root/.npm
-RUN npm run build || :
+RUN npm run build
 EXPOSE 4000
 USER node
 CMD npm start
