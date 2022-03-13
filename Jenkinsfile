@@ -32,7 +32,7 @@ node {
             // Run container
             sh "docker run -d --restart=always -p 4000:4000 -u root:root --name graphql-prisma-graphql adrxking/docker-graphql:${commit_id}"
             sh "docker cp .env graphql-prisma-graphql:/app/.env"
-            sh "docker exec -w /app bash -c \"npm run start\""
+            sh "docker exec -w /app graphql-prisma-graphql bash -c \"npm run start\""
         }
     } 
 }
